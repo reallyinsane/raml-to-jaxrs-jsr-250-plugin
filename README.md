@@ -7,23 +7,23 @@ plugin was created to make it even easier to apply JSR-250 annotations.
 You have to use this plugin when generating Java sources with raml-to-jaxrs. A sample configuration looks like this:
 
 ```
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.raml.jaxrs</groupId>
-				<artifactId>raml-to-jaxrs-maven-plugin</artifactId>
-				<version>3.0.0-SNAPSHOT</version>
-				<dependencies>
-					<dependency>
-						<groupId>io.mathan.raml</groupId>
-						<artifactId>raml-to-jaxrs-jsr-250-plugin</artifactId>
-						<version>1.0.0-SNAPSHOT</version>
-					</dependency>
-				</dependencies>
-        ...
-			</plugin>
-		</plugins>
-	</build>
+<build>
+  <plugins>
+    <plugin>
+      <groupId>org.raml.jaxrs</groupId>
+      <artifactId>raml-to-jaxrs-maven-plugin</artifactId>
+      <version>3.0.0-SNAPSHOT</version>
+      <dependencies>
+        <dependency>
+          <groupId>io.mathan.raml</groupId>
+          <artifactId>raml-to-jaxrs-jsr-250-plugin</artifactId>
+          <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+      </dependencies>
+      ...
+    </plugin>
+  </plugins>
+</build>
 ```
 
 For each JSR-250 annotation you want to use you have to declare a specific plugin in your RAML file.
