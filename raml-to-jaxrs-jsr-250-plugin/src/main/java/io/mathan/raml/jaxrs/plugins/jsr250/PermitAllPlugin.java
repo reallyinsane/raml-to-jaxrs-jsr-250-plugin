@@ -29,7 +29,7 @@ import org.raml.jaxrs.generator.ramltypes.GResponse;
  * Support for {@link javax.annotation.security.PermitAll} annotation on generated resources or
  * resource methods.
  */
-public class PermitAllPlugin implements GlobalResourceExtension {
+public class PermitAllPlugin extends DefaultGlobalResourceExtension {
 
   public Builder onResource(ResourceContext context, GResource resource, Builder typeSpec) {
     typeSpec.addAnnotation(javax.annotation.security.PermitAll.class);
@@ -40,14 +40,5 @@ public class PermitAllPlugin implements GlobalResourceExtension {
       MethodSpec.Builder methodSpec) {
     methodSpec.addAnnotation(javax.annotation.security.PermitAll.class);
     return methodSpec;
-  }
-
-  public Builder onResponseClass(ResourceContext context, GMethod method, Builder typeSpec) {
-    return null;
-  }
-
-  public MethodSpec.Builder onMethod(ResourceContext context, GResponse responseMethod,
-      MethodSpec.Builder methodSpec) {
-    return null;
   }
 }

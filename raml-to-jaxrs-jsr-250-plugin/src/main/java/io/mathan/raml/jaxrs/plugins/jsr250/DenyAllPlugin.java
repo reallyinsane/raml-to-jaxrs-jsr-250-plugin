@@ -33,7 +33,7 @@ import org.raml.v2.api.model.v10.datamodel.ObjectTypeDeclaration;
  * Support for {@link javax.annotation.security.DenyAll} annotation on generated resources or
  * resource methods.
  */
-public class DenyAllPlugin implements GlobalResourceExtension {
+public class DenyAllPlugin extends DefaultGlobalResourceExtension {
 
   public Builder onResource(ResourceContext context, GResource resource, Builder typeSpec) {
     typeSpec.addAnnotation(javax.annotation.security.DenyAll.class);
@@ -44,14 +44,5 @@ public class DenyAllPlugin implements GlobalResourceExtension {
       MethodSpec.Builder methodSpec) {
     methodSpec.addAnnotation(javax.annotation.security.DenyAll.class);
     return methodSpec;
-  }
-
-  public Builder onResponseClass(ResourceContext context, GMethod method, Builder typeSpec) {
-    return null;
-  }
-
-  public MethodSpec.Builder onMethod(ResourceContext context, GResponse responseMethod,
-      MethodSpec.Builder methodSpec) {
-    return null;
   }
 }

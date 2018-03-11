@@ -16,11 +16,8 @@
 
 package io.mathan.raml.jaxrs.plugins.jsr250;
 
-import com.squareup.javapoet.AnnotationSpec;
 import com.squareup.javapoet.MethodSpec;
 import com.squareup.javapoet.TypeSpec.Builder;
-import java.util.List;
-import javax.annotation.security.RolesAllowed;
 import org.raml.jaxrs.generator.extension.resources.api.GlobalResourceExtension;
 import org.raml.jaxrs.generator.extension.resources.api.ResourceContext;
 import org.raml.jaxrs.generator.ramltypes.GMethod;
@@ -29,31 +26,29 @@ import org.raml.jaxrs.generator.ramltypes.GResource;
 import org.raml.jaxrs.generator.ramltypes.GResponse;
 
 /**
- * Support for {@link javax.annotation.security.RolesAllowed} annotation on generated resources or
- * resource methods.
+ * Default implementation of a {@link GlobalResourceExtension} changing nothing.
  */
-public class RolesAllowedPlugin extends DefaultGlobalResourceExtension {
+public class DefaultGlobalResourceExtension implements GlobalResourceExtension {
 
-  private final List<String> arguments;
-
-  public RolesAllowedPlugin(List<String> arguments) {
-    this.arguments = arguments;
-  }
-
+  @Override
   public Builder onResource(ResourceContext context, GResource resource, Builder typeSpec) {
-    typeSpec.addAnnotation(createAnnotation());
     return typeSpec;
   }
 
+  @Override
   public MethodSpec.Builder onMethod(ResourceContext context, GMethod method, GRequest gRequest,
       MethodSpec.Builder methodSpec) {
-    methodSpec.addAnnotation(createAnnotation());
     return methodSpec;
   }
 
-  private AnnotationSpec createAnnotation() {
-        return AnnotationSpec.builder(RolesAllowed.class)
-            .addMember("value","$L",  "{\"" + String.join("\",\"", arguments) + "\"}")
-            .build();
+  @Override
+  public Builder onResponseClass(ResourceContext context, GMethod method, Builder typeSpec) {
+    return typeSpec;
+  }
+
+  @Override
+  public MethodSpec.Builder onMethod(ResourceContext context, GResponse responseMethod,
+      MethodSpec.Builder methodSpec) {
+    return methodSpec;
   }
 }
