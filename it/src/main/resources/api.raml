@@ -1,0 +1,106 @@
+#%RAML 1.0
+title: ZAK API
+version: v1
+baseUri: http://localhost:8080
+mediaType:
+  - application/json
+uses:
+  ramltojaxrs: ramltojaxrs.raml
+  ramltopojo: ramltopojo.raml
+(ramltopojo.types):
+  plugins:
+    - name: core.box
+types:
+  Long:
+    type: number
+    format: int64
+  BodyType:
+    type: string
+
+/noneShallPass:
+  (ramltojaxrs.resources):
+    plugins:
+      - name: jsr250.denyAll
+  get:
+    responses:
+      200:
+        body:
+          type: BodyType
+  /{id}:
+    get:
+      (ramltojaxrs.methods):
+        plugins:
+          - name: jsr250.rolesAllowed
+            arguments: [SpecialRole]
+      responses:
+        200:
+          body:
+            type: BodyType
+    put:
+      (ramltojaxrs.methods):
+        plugins:
+          - name: jsr250.permitAll
+      body:
+        type: BodyType
+      responses:
+        200:
+          body:
+            type: BodyType
+/allPass:
+  (ramltojaxrs.resources):
+    plugins:
+      - name: jsr250.permitAll
+  get:
+    responses:
+      200:
+        body:
+          type: BodyType
+  /{id}:
+    get:
+      (ramltojaxrs.methods):
+        plugins:
+          - name: jsr250.rolesAllowed
+            arguments: [SpecialRole]
+      responses:
+        200:
+          body:
+            type: BodyType
+    put:
+      (ramltojaxrs.methods):
+        plugins:
+          - name: jsr250.denyAll
+      body:
+        type: BodyType
+      responses:
+        200:
+          body:
+            type: BodyType
+/worthyPass:
+  (ramltojaxrs.resources):
+    plugins:
+      - name: jsr250.rolesAllowed
+        arguments: [SpecialRole]
+  get:
+    responses:
+      200:
+        body:
+          type: BodyType
+  /{id}:
+    get:
+      (ramltojaxrs.methods):
+        plugins:
+          - name: jsr250.permitAll
+      responses:
+        200:
+          body:
+            type: BodyType
+    put:
+      (ramltojaxrs.methods):
+        plugins:
+          - name: jsr250.denyAll
+      body:
+        type: BodyType
+      responses:
+        200:
+          body:
+            type: BodyType
