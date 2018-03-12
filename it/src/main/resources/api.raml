@@ -17,6 +17,30 @@ types:
   BodyType:
     type: string
 
+/sample:
+  (ramltojaxrs.resources):
+    plugins:
+      - name: jsr250.permitAll
+  get:
+    (ramltojaxrs.methods):
+      plugins:
+        - name: jsr250.rolesAllowed
+          arguments: [SpecialRole]
+    responses:
+      200:
+        body:
+          type: BodyType
+  put:
+    (ramltojaxrs.methods):
+      plugins:
+        - name: jsr250.denyAll
+    body:
+      type: BodyType
+    responses:
+      200:
+        body:
+          type: BodyType
+
 /noneShallPass:
   (ramltojaxrs.resources):
     plugins:
