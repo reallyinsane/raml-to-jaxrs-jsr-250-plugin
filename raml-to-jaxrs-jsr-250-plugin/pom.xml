@@ -38,7 +38,7 @@
     <dependency>
       <groupId>org.raml.jaxrs</groupId>
       <artifactId>jaxrs-code-generator</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
+      <version>3.0.1</version>
     </dependency>
     <dependency>
       <groupId>javax.annotation</groupId>
