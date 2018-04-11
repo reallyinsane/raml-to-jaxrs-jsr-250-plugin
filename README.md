@@ -1,7 +1,7 @@
 JSR-250 annotations for [raml-for-jax-rs](https://github.com/mulesoft-labs/raml-for-jax-rs) 
 =====
 
-With upcoming [raml-for-jax-rs 3.0.0](https://github.com/mulesoft-labs/raml-for-jax-rs/tree/release/3.0.0) the plugin mechanism to enhance the generation of JAX-RS resources is redesigned. This allows to write custom plugins enabling generation of dynamic content for the created JAX-RS resources. This project is one of the first using this extension.
+With [raml-for-jax-rs 3.0](https://github.com/mulesoft-labs/raml-for-jax-rs/tree/3.0.1) the plugin mechanism to enhance the generation of JAX-RS resources is redesigned. This allows to write custom plugins enabling generation of dynamic content for the created JAX-RS resources. This project is one of the first using this extension.
 
 When generating JAX-RS resources these should be secured by using JSR-250 annotations like ```@DenyAll```, ```@PermitAll``` and ```@RolesAllowed```. This project provides the plugins for raml-for-jax-rs to enable this feature for RAML files.
 
@@ -15,7 +15,7 @@ To enable the plugin it needs to be declared as dependency to raml-to-jaxrs-mave
     <plugin>
       <groupId>org.raml.jaxrs</groupId>
       <artifactId>raml-to-jaxrs-maven-plugin</artifactId>
-      <version>3.0.0-SNAPSHOT</version>
+      <version>3.0.1</version>
       <dependencies>
         <dependency>
           <groupId>io.mathan.raml</groupId>
