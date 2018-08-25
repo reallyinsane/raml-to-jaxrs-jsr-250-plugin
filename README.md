@@ -15,7 +15,7 @@ To enable the plugin it needs to be declared as dependency to raml-to-jaxrs-mave
     <plugin>
       <groupId>org.raml.jaxrs</groupId>
       <artifactId>raml-to-jaxrs-maven-plugin</artifactId>
-      <version>3.0.1</version>
+      <version>3.0.2</version>
       <dependencies>
         <dependency>
           <groupId>io.mathan.raml</groupId>
