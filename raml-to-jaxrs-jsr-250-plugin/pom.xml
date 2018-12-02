@@ -1,40 +1,65 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>io.mathan.raml</groupId>
+    <artifactId>raml-to-jaxrs-jsr-250-plugin-reactor</artifactId>
+    <version>1.0.0</version>
+  </parent>
+  <artifactId>raml-to-jaxrs-jsr-250-plugin</artifactId>
+  <properties>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+  </properties>
+  <description>A plugin for raml-to-jaxrs generating JSR-250 annotations.</description>
+  <name>Mathan raml-to-jaxrs JSR-250 plugin</name>
+
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <url>https://github.com/reallyinsane/raml-to-jaxrs-jsr-250-plugin</url>
+
   <build>
     <plugins>
       <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
+        <groupId>org.sonatype.plugins</groupId>
+        <artifactId>nexus-staging-maven-plugin</artifactId>
+        <version>1.6.7</version>
+        <extensions>true</extensions>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <serverId>ossrh</serverId>
+          <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+          <autoReleaseAfterClose>true</autoReleaseAfterClose>
         </configuration>
       </plugin>
     </plugins>
   </build>
-  <parent>
-		<groupId>io.mathan.raml</groupId>
-		<artifactId>raml-to-jaxrs-jsr-250-plugin-reactor</artifactId>
-		<version>1.0.0-SNAPSHOT</version>
-	</parent>
-	<artifactId>raml-to-jaxrs-jsr-250-plugin</artifactId>
-	<repositories>
-		<repository>
-			<id>mulesoft-releases</id>
-			<name>MuleSoft Releases Repository</name>
-			<url>https://repository-master.mulesoft.org/releases/</url>
-		</repository>
-		<repository>
-			<id>mulesoft-snapshots</id>
-			<name>MuleSoft Snapshots Repository</name>
-			<url>https://repository-master.mulesoft.org/snapshots/</url>
-		</repository>
-	</repositories>
+  <distributionManagement>
+    <snapshotRepository>
+      <id>ossrh</id>
+      <url>https://oss.sonatype.org/content/repositories/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+  <repositories>
+    <repository>
+      <id>mulesoft-releases</id>
+      <name>MuleSoft Releases Repository</name>
+      <url>https://repository-master.mulesoft.org/releases/</url>
+    </repository>
+    <repository>
+      <id>mulesoft-snapshots</id>
+      <name>MuleSoft Snapshots Repository</name>
+      <url>https://repository-master.mulesoft.org/snapshots/</url>
+    </repository>
+  </repositories>
 
-	<dependencies>
+  <dependencies>
     <dependency>
       <groupId>org.raml.jaxrs</groupId>
       <artifactId>jaxrs-code-generator</artifactId>
@@ -46,5 +71,53 @@
       <version>1.2</version>
     </dependency>
   </dependencies>
-    
+  <profiles>
+    <profile>
+      <id>release</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+            <version>2.10.3</version>
+            <executions>
+              <execution>
+                <id>attach-javadocs</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+            <version>3.0.0</version>
+            <executions>
+              <execution>
+                <id>attach-sources</id>
+                <goals>
+                  <goal>jar</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-gpg-plugin</artifactId>
+            <version>1.5</version>
+            <executions>
+              <execution>
+                <id>sign-artifacts</id>
+                <phase>verify</phase>
+                <goals>
+                  <goal>sign</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 </project>

@@ -20,7 +20,7 @@ To enable the plugin it needs to be declared as dependency to raml-to-jaxrs-mave
         <dependency>
           <groupId>io.mathan.raml</groupId>
           <artifactId>raml-to-jaxrs-jsr-250-plugin</artifactId>
-          <version>1.0.0-SNAPSHOT</version>
+          <version>1.0.0</version>
         </dependency>
       </dependencies>
       ...
